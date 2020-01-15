@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 980px;
+      height: 500px;
+      margin: 0 auto;
+      padding: 0 auto;
+      border: 1px solid black;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      float: left;
+    }
+
+
+    ul li span {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      /* border: 1px solid black; */
+      border-radius: 25%;
+      /* background: pink; */
+      /* color: black; */
+    }
+
+    .btn span {
+      border: 1px solid black;
+      background: chocolate;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <ul id="ul">
+      <!-- <li><img src="images/a.png" alt="" width="200px" height="200px">
+        <span>99</span>
+      </li> -->
+    </ul>
+  </div>
+  <div class="btn">
+    <span>随机排序</span>
+    <span>从大到小</span>
+    <span>从小到大</span>
+  </div>
+
+  <script>
+    //模拟数据
+    var arr = [
+      {
+        src: "images/a.png",
+        price: 99,
+
+      },
+      {
+        src: "images/b.png",
+        price: 200,
+
+      },
+      {
+        src: "images/c.png",
+        price: 201,
+
+      },
+      {
+        src: "images/d.png",
+        price: 256.6,
+
+      },
+      {
+        src: "images/e.png",
+        price: 500,
+
+      }
+
+
+    ];
+    var ul = document.getElementById("ul");
+    var len = arr.length;
+    var btn = document.querySelectorAll(".btn span");
+    var btnLen = btn.length;
+    function fn() {
+      var html = '';
+      for (var i = 0; i < len; i++) {
+        html += '<li>' +
+          '<img src="' + arr[i].src + '" width="200px" height="200px">' +
+          '<span>' + arr[i].price + '<span>'
+        ul.innerHTML = html;
+      }
+    }
+    fn();
+
+
+    for (var j = 0; j < btnLen; j++) {
+
+      btn[j].index = j;
+      btn[0].onclick = function () {
+        arr.sort(function () {
+          return Math.random() - 0.5; //如果是正数就排序  不是正数就不排序
+        })
+        fn()
+      }
+      btn[1].onclick = function () {
+        arr.sort(function (a, b) {
+          return b.price - a.price; // 从大到小
+        })
+        fn()
+      }
+      btn[2].onclick = function () {
+        arr.sort(function (a, b) {
+          return a.price - b.price; //从小到大
+        })
+        fn()
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
